@@ -27,7 +27,7 @@ var Thread = React.createClass({
     return (
       <div style={threadStyle}>
         <div style={titleStyle} onClick={this.props.onClick.bind( null, this.props.link )}>
-            {this.props.title}
+            <span dangerouslySetInnerHTML={{__html: this.props.title}} />
         </div>
         <div style={scoreStyle}>{this.props.score} - <i>{this.props.author}</i></div>
       </div>
