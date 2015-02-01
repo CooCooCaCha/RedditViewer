@@ -29,6 +29,19 @@ var SubredditList = React.createClass({
         backgroundColor : '#444'
     };
 
+    var favoritesHeaderStyle = {
+        color: '#fff',
+        fontSize: '14px',
+        textDecoration: 'underline'
+    };
+
+    var findHeaderStyle = {
+        color: '#fff',
+        fontSize: '14px',
+        textDecoration: 'underline',
+        marginTop: '20px'
+    };
+
     var subredditNodes = this.state.subreddits.map( function( subreddit ) {
         return (
             <Subreddit link={subreddit} onLinkClick={this.props.onSubredditChange}/>
@@ -37,7 +50,9 @@ var SubredditList = React.createClass({
 
     return (
         <div style={listStyle}>
+            <div style={favoritesHeaderStyle}>Favorites</div>
             {subredditNodes}
+            <div style={findHeaderStyle}>Find</div>
         </div>
     );
   }
