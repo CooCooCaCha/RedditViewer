@@ -35,13 +35,6 @@ var CommentList = React.createClass({
         backgroundColor: '#ccc'
     };
 
-    var commentStyle = {
-        border: '1px solid black',
-        backgroundColor: '#fff',
-        padding: '5px',
-        margin: '5px'
-    };
-
     var headerStyle = {
         padding: '10px',
         margin: '5px',
@@ -56,21 +49,11 @@ var CommentList = React.createClass({
         fontSize: '12px'
     };
 
-    var authorStyle = {
-        textDecoration: 'underline'
-    };
-
     var commentNodes = this.state.comments.map( function( comment ) {
-        var commentHtml = marked( comment.body )
-            .replace( /&amp;gt;/g, '>' ).replace( /&amp;lt;/g, '<' );
-
         return (
-            <div style={commentStyle}>
-                <div style={authorStyle}>{comment.author}</div>
-                <div dangerouslySetInnerHTML={{__html: commentHtml}} />
-            </div>
+            <Comment author={comment.author} body={comment.body} />
         );
-    }.bind( this ));
+    });
 
     var selftextHtml = converter.makeHtml( this.state.header.selftext )
         .replace( /&amp;gt;/g, '>' ).replace( /&amp;lt;/g, '<' );
