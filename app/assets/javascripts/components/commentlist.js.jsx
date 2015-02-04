@@ -14,7 +14,7 @@ var CommentList = React.createClass({
 
       $.get( commentUrl, function( response ) {
           var comments = response[1].data.children.map( function( comment ) {
-              return { author: comment.data.author, body: comment.data.body };
+              return comment.data;
           });
 
           comments.pop();
@@ -50,8 +50,13 @@ var CommentList = React.createClass({
     };
 
     var commentNodes = this.state.comments.map( function( comment ) {
+        var replies = [];
+
+        if( typeof comment.replies.data !== 'undefined' )
+            replies = comment.replies.data.children;
+
         return (
-            <Comment author={comment.author} body={comment.body} />
+            <Comment author={comment.author} body={comment.body} replies={replies} />
         );
     });
 
