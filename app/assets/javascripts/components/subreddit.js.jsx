@@ -9,9 +9,14 @@ var Subreddit = React.createClass({
         color: '#fff'
     };
 
+    var name = this.props.link;
+
+    if( name === '' )
+        name = 'frontpage';
+
     return (
       <div>
-          <a style={threadStyle} onClick={this.props.onLinkClick.bind( null, this.props.link )}>/r/{this.props.link}</a>
+          <a style={threadStyle} onClick={this.props.onLinkClick.bind( null, this.props.link )}>/r/{name}</a>
       </div>
     );
   }

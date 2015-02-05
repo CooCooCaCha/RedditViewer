@@ -42,6 +42,8 @@ var SubredditList = React.createClass({
         marginTop: '20px'
     };
 
+    var frontpageLink = '';
+
     var subredditNodes = this.state.subreddits.map( function( subreddit ) {
         return (
             <Subreddit link={subreddit} onLinkClick={this.props.onSubredditChange}/>
@@ -51,6 +53,7 @@ var SubredditList = React.createClass({
     return (
         <div style={listStyle}>
             <div style={favoritesHeaderStyle}>Favorites</div>
+            <Subreddit link={frontpageLink} onLinkClick={this.props.onSubredditChange}/>
             {subredditNodes}
             <div style={findHeaderStyle}>Find</div>
         </div>
