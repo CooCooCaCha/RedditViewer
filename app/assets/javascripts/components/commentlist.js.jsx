@@ -31,7 +31,7 @@ var CommentList = React.createClass({
         height: '100%',
         overflow: 'scroll',
         float: 'right',
-        width: '90%',
+        width: '85%',
         backgroundColor: '#ccc'
     };
 
@@ -56,7 +56,7 @@ var CommentList = React.createClass({
             replies = comment.replies.data.children;
 
         return (
-            <Comment author={comment.author} body={comment.body} replies={replies} />
+            <Comment author={comment.author} body={comment.body} replies={replies} level={0}/>
         );
     });
 

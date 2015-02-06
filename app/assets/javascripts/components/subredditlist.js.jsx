@@ -24,7 +24,7 @@ var SubredditList = React.createClass({
   render: function() {
     var listStyle = {
         float           : 'left',
-        width           : '10%',
+        width           : '15%',
         height          : '100%',
         backgroundColor : '#444'
     };
@@ -42,6 +42,10 @@ var SubredditList = React.createClass({
         marginTop: '20px'
     };
 
+    var listContainerStyle = {
+        margin: '5px'
+    };
+
     var frontpageLink = '';
 
     var subredditNodes = this.state.subreddits.map( function( subreddit ) {
@@ -52,10 +56,12 @@ var SubredditList = React.createClass({
 
     return (
         <div style={listStyle}>
-            <div style={favoritesHeaderStyle}>Favorites</div>
-            <Subreddit link={frontpageLink} onLinkClick={this.props.onSubredditChange}/>
-            {subredditNodes}
-            <div style={findHeaderStyle}>Find</div>
+            <div style={listContainerStyle}>
+                <div style={favoritesHeaderStyle}>Favorites</div>
+                <Subreddit link={frontpageLink} onLinkClick={this.props.onSubredditChange}/>
+                {subredditNodes}
+                <div style={findHeaderStyle}>Find</div>
+            </div>
         </div>
     );
   }

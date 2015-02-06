@@ -6,8 +6,10 @@ React is used for the user interface and querying data from reddit.
 Rails is used for managing accounts and subreddits.
 
 TODO
-- Nested comments.
-- Thumbnail previews for threads.
+- Thumbnail view in thread.
+- Collapse sub-comments.
+- Move forward and backward through top-level comments.
+- Expanded image view.
 - Navigate back to subreddit from within a thread.
 
 FUTURE
@@ -17,3 +19,4 @@ FUTURE
 - User flair
 - Gilded comments
 - Color coded usernames.
+- Expand scope to include all sorts of feeds through a plugin interface.

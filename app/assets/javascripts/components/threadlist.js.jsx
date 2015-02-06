@@ -34,7 +34,7 @@ var ThreadList = React.createClass({
   render: function() {
     var threadNodes = this.state.threads.map( function( thread ) {
         return (
-            <Thread title={thread.title} author={thread.author} score={thread.score} link={thread.id} thumbnail={thread.thumbnail} onClick={this.props.onThread} />
+            <Thread title={thread.title} author={thread.author} score={thread.score} link={thread.id} thumbnail={thread.thumbnail} onClick={this.props.onThread} url={thread.url} domain={thread.domain} />
         );
     }.bind(this));
 
@@ -42,7 +42,7 @@ var ThreadList = React.createClass({
         height: '100%',
         overflow: 'scroll',
         float: 'right',
-        width: '90%',
+        width: '85%',
         backgroundColor: '#ccc'
     };
 
