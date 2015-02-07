@@ -8,11 +8,10 @@ Rails is used for managing accounts and subreddits.
 TODO
 - Thumbnail view in thread.
 - Collapse sub-comments.
-- Move forward and backward through top-level comments.
-- Expanded image view.
-- Navigate back to subreddit from within a thread.
+- Content link.
 
 FUTURE
+- Move forward and backward through top-level comments.
 - Integrate metareddit-based search
 - Multiple accounts.
 - Sync subreddit favorites.
@@ -20,3 +19,14 @@ FUTURE
 - Gilded comments
 - Color coded usernames.
 - Expand scope to include all sorts of feeds through a plugin interface.
+
+Reddit
+	SideMenu
+		AddSubredditBar
+		FavoritesList
+	ThreadList
+		ThreadRow
+	Thread
+		ThreadHeader
+		CommentList
+			Comment

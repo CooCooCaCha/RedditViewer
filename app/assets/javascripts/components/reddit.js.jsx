@@ -7,8 +7,12 @@ var Reddit = React.createClass({
   		this.replaceState( { subreddit: subreddit } );
   	},
 
+  	backButton: function() {
+  		this.replaceState( { subreddit: this.state.subreddit } );
+  	},
+
   	loadThread: function( thread ) {
-  		this.replaceState( { thread: thread } );
+  		this.setState( { thread: thread } );
   	},
 
 	render: function() {
@@ -16,13 +20,26 @@ var Reddit = React.createClass({
 			height: '100%'
 		};
 
-		var content = (typeof this.state.subreddit !== 'undefined') ? 
+		var backStyle = {
+			//height: '10%'
+		};
+
+		var commentContainer = {
+			height: '100%'
+		};
+
+		var content = (typeof this.state.thread === 'undefined') ? 
 			(<ThreadList subreddit={this.state.subreddit} onThread={this.loadThread} />) :
-			(<CommentList thread={this.state.thread} />);
+			(
+				<div style={commentContainer}>
+					<div onClick={this.backButton} style={backStyle}>Back</div>
+					<CommentList thread={this.state.thread} />
+				</div>
+			);
 
 		return (
 			<div style={containerStyle}>
-				<SubredditList onSubredditChange={this.loadSubreddit} />
+				<SideMenu onSelectFavorite={this.loadSubreddit} />
 				{content}
 			</div>
 		);

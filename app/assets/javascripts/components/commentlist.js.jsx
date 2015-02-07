@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 var CommentList = React.createClass({
   propTypes: {
     thread: React.PropTypes.string
@@ -60,7 +58,7 @@ var CommentList = React.createClass({
         );
     });
 
-    var selftextHtml = converter.makeHtml( this.state.header.selftext )
+    var selftextHtml = marked( this.state.header.selftext )
         .replace( /&amp;gt;/g, '>' ).replace( /&amp;lt;/g, '<' );
 
     return (
@@ -70,6 +68,7 @@ var CommentList = React.createClass({
                      dangerouslySetInnerHTML={{__html: this.state.header.title}} />
                 <div style={headerBodyStyle} 
                      dangerouslySetInnerHTML={{__html: selftextHtml}} />
+                <div><img src={this.state.header.url} /></div>
             </div>
             {commentNodes}
         </div>

@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 function HSVtoRGB(h, s, v) {
     var r, g, b, i, f, p, q, t;
     if (h && s === undefined && v === undefined) {
@@ -41,16 +39,17 @@ var Comment = React.createClass({
         else
             rgb = HSVtoRGB( (360-(36*this.props.level))/360, 0.3, 1 );
 
+        var commentColor = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ' )';
+
         var commentStyle = {
             border: '1px solid #aaa',
-            borderLeft: '5px solid ' +'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')',
+            borderLeft: '5px solid ' + commentColor,
             backgroundColor: '#fff',
             padding: '5px',
             margin: '5px'
         };
 
         var authorStyle = {
-            //textDecoration: 'underline'
             fontSize: '10px',
             color: '#aaa'
         };

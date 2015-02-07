@@ -1,4 +1,4 @@
-var Thread = React.createClass({
+var ThreadRow = React.createClass({
   propTypes: {
     title: React.PropTypes.string,
     author: React.PropTypes.string,
@@ -7,6 +7,7 @@ var Thread = React.createClass({
     thumbnail: React.PropTypes.string,
     url: React.PropTypes.string,
     domain: React.PropTypes.string,
+    commentNum: React.PropTypes.number,
 
     onClick: React.PropTypes.func
   },
@@ -44,8 +45,7 @@ var Thread = React.createClass({
     };
 
     var fullImageStyle = {
-        height: '500px',
-        width: '100%'
+        width: '60%'
     };
 
     var expandStyle = {
@@ -53,17 +53,26 @@ var Thread = React.createClass({
         width: '20px',
         height: '20px',
         textAlign: 'center',
-        border: '1px solid black'
+        border: '1px solid black',
+        marginTop: '3px'
     };
 
     var fullImageContainerStyle = {
-        width: '100%'
+        width: '100%',
+        textAlign: 'center',
+        marginTop: '40px'
     };
 
     var scoreScoreStyle = {
         color: '#fff',
         backgroundColor: '#aaa',
         padding: '2px 4px'
+    };
+
+    var commentNumStyle = {
+        fontSize: '10px',
+        marginLeft: '10px',
+        marginTop: '10px'
     };
 
     var thumbnail    = null;
@@ -77,13 +86,18 @@ var Thread = React.createClass({
 
         if( this.state.expanded )
         {
+            var url = this.props.url;
+
+            if( this.props.domain === 'imgur.com' )
+                url = url + '.png';
+
             expandButton = (
                 <div style={expandStyle} onClick={this.toggleExpand}>-</div>
             );
 
             fullImage = (
                 <div style={fullImageContainerStyle}>
-                    <iframe src={this.props.url} style={fullImageStyle} />
+                    <img src={url} style={fullImageStyle} />
                 </div>
             );
         }
@@ -98,12 +112,12 @@ var Thread = React.createClass({
     return (
       <div style={threadStyle}>
         {thumbnail}
-        <div style={titleStyle} onClick={this.props.onClick.bind( null, this.props.link )}>
+        <div style={titleStyle} onClick={this.props.onClick.bind( null, this.props.url )}>
             <span dangerouslySetInnerHTML={{__html: this.props.title}} />
         </div>
         <div style={scoreStyle}><span style={scoreScoreStyle}>{this.props.score}</span> - <i>{this.props.author}</i> ({this.props.domain})</div>
-        <div>{expandButton}</div>
-        <div>{fullImage}</div>
+        <div>{expandButton} <span style={commentNumStyle} onClick={this.props.onClick.bind( null, this.props.link )}>{this.props.commentNum} Comments</span></div>
+        {fullImage}
       </div>
     );
   }
