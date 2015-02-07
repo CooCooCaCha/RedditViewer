@@ -59,7 +59,7 @@ var ThreadRow = React.createClass({
 	        width: '60%'
 	    };
 
-	    var hasThumb = this.props.thread.thumbnail !== 'self'    && 
+	    var hasThumb = this.props.thread.thumbnail !== 'self'   && 
 	    			   this.props.thread.thumbnail !== 'default' && 
 	    			   this.props.thread.thumbnail !== '';
 
@@ -77,7 +77,9 @@ var ThreadRow = React.createClass({
 
 		return ( 
 			<div style={threadRowStyle}>
-				{hasThumb && <img src={this.props.thread.thumbnail} style={thumbStyle} />}
+				{hasThumb && <a href={this.props.thread.url} target="__blank">
+					<img src={this.props.thread.thumbnail} style={thumbStyle} />
+				</a>}
 		        <div style={titleStyle} onClick={this.props.onSelectThread.bind( null, this.props.thread.id )}>
 		            <span dangerouslySetInnerHTML={{__html: this.props.thread.title}} />
 		        </div>

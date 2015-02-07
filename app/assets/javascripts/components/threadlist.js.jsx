@@ -36,12 +36,6 @@ var ThreadList = React.createClass({
 	},
 
     render: function() {
-	    var threadNodes = this.state.threads.map( function( thread ) {
-	    	return (
-	    		<ThreadRow thread={thread} onSelectThread={this.props.onSelectThread} />
-	    	);
-	    }.bind(this));
-
 	    var threadListStyle = {
 	        height: '100%',
 	        overflow: 'scroll',
@@ -49,6 +43,12 @@ var ThreadList = React.createClass({
 	        width: '85%',
 	        backgroundColor: '#ccc'
 	    };
+
+	    var threadNodes = this.state.threads.map( function( thread ) {
+	    	return (
+	    		<ThreadRow thread={thread} onSelectThread={this.props.onSelectThread} />
+	    	);
+	    }.bind(this));
 
 	    return (
 	    	<div style={threadListStyle}>
