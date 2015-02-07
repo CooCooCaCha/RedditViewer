@@ -31,6 +31,14 @@ var Comment = React.createClass({
         level   : React.PropTypes.number
     },
 
+    getInitialState: function() {
+        return { expanded: false };
+    },
+
+    toggleExpanded: function() {
+        this.setState( { expanded: !this.state.expanded } );
+    },
+
     render: function() {
         var rgb = null;
 
@@ -54,6 +62,14 @@ var Comment = React.createClass({
             color: '#aaa'
         };
 
+        var expandButtonStyle = {
+            display: 'inline-block',
+            width: '20px',
+            height: '20px',
+            textAlign: 'center',
+            border: '1px solid black'
+        };
+
         var body = this.props.body;
         if( typeof body === 'undefined' )
             body = '[deleted]';
@@ -62,6 +78,7 @@ var Comment = React.createClass({
             .replace( /&amp;gt;/g, '>' ).replace( /&amp;lt;/g, '<' );
 
         var replyLevel = this.props.level + 1;
+        var expandButtonText = this.state.expanded ? '-' : '+';
 
         var replyComments = this.props.replies.map( function( reply ) {
             var replies = [];
@@ -78,7 +95,8 @@ var Comment = React.createClass({
             <div style={commentStyle}>
                 <div style={authorStyle}>{this.props.author}</div>
                 <div dangerouslySetInnerHTML={{__html: commentHtml}} />
-                <div>{replyComments}</div>
+                <a style={expandButtonStyle} onClick={this.toggleExpanded}>{expandButtonText}</a>
+                {this.state.expanded && <div>{replyComments}</div>}
             </div>
         );
     }

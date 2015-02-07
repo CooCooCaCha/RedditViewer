@@ -6,9 +6,12 @@ React is used for the user interface and querying data from reddit.
 Rails is used for managing accounts and subreddits.
 
 TODO
+- Refactor comment section.
 - Thumbnail view in thread.
 - Collapse sub-comments.
-- Content link.
+- Thread list advanced (pagination, and sorting)
+- Comment list advanced (sorting)
+- Router
 
 FUTURE
 - Move forward and backward through top-level comments.
