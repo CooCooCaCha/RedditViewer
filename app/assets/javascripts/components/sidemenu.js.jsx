@@ -11,7 +11,7 @@ var SideMenu = React.createClass({
         };
 
         $.post( '/subreddits', newFav, function() {
-            this.refs.favList.getFavoritesList();
+            this.refs.subList.getFavoritesList();
         }.bind(this));
     },
 
@@ -31,7 +31,7 @@ var SideMenu = React.createClass({
             <div style={listStyle}>
                 <div style={listInnerStyle}>
                     <AddFavoriteBar onNewFavorite={this.onNewFavorite} />
-                    <FavoritesList ref="favList" onSelectFavorite={this.props.onSelectFavorite} />
+                    <SubredditList ref="subList" onSelectFavorite={this.props.onSelectFavorite} />
                 </div>
             </div>
         );

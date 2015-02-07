@@ -1,55 +1,59 @@
 var ThreadList = React.createClass({
-  propTypes: {
-      subreddit: React.PropTypes.string,
-      onThread: React.PropTypes.func
-  },
+	propTypes: {
+        subreddit: React.PropTypes.string,
+        onSelectThread: React.PropTypes.func
+    },
 
-  getInitialState: function() {
-      return { threads: [] };
-  },
+	getInitialState: function() {
+	    return { threads: [] };
+	},
 
-  componentDidMount: function() {
-      this.getSubredditContent( this.props.subreddit );
-  },
+	componentDidMount: function() {
+	    this.getSubredditContent( this.props.subreddit );
+	},
 
-  componentWillReceiveProps: function( nextProps ) {
-      this.getSubredditContent( nextProps.subreddit );
-  },
+	componentWillReceiveProps: function( nextProps ) {
+	    this.getSubredditContent( nextProps.subreddit );
+	},
 
-  getSubredditContent: function( subreddit ) {
-      if( subreddit !== '' ) 
-          subreddit = 'https://www.reddit.com/r/' + subreddit + '.json';
-      else
-          subreddit = 'https://www.reddit.com/.json'
+	subredditToUrl: function( subreddit ) {
+	    if( subreddit === '' ) 
+	        return 'https://www.reddit.com/.json';
 
-      $.get( subreddit, function( response ) {
-          var threads = response.data.children.map( function( thread ) {
-              return thread.data;
-          });
+	    return 'https://www.reddit.com/r/' + subreddit + '.json';
+	},
 
-          this.setState( { threads: threads } );
-      }.bind(this));
-  },
+	getSubredditContent: function( subreddit ) {
+		var url = this.subredditToUrl( subreddit );
 
-  render: function() {
-    var threadNodes = this.state.threads.map( function( thread ) {
-        return (
-            <ThreadRow title={thread.title} author={thread.author} score={thread.score} link={thread.id} thumbnail={thread.thumbnail} onClick={this.props.onThread} url={thread.url} domain={thread.domain} commentNum={thread.num_comments} />
-        );
-    }.bind(this));
+	    $.get( url, function( response ) {
+	        var threads = response.data.children.map( function( thread ) {
+	            return thread.data;
+	        });
 
-    var contentStyle = {
-        height: '100%',
-        overflow: 'scroll',
-        float: 'right',
-        width: '85%',
-        backgroundColor: '#ccc'
-    };
+	        this.setState( { threads: threads } );
+	    }.bind(this));
+	},
 
-    return (
-        <div style={contentStyle}>
-            {threadNodes}
-        </div>
-    );
-  }
+    render: function() {
+	    var threadNodes = this.state.threads.map( function( thread ) {
+	    	return (
+	    		<ThreadRow thread={thread} onSelectThread={this.props.onSelectThread} />
+	    	);
+	    }.bind(this));
+
+	    var threadListStyle = {
+	        height: '100%',
+	        overflow: 'scroll',
+	        float: 'right',
+	        width: '85%',
+	        backgroundColor: '#ccc'
+	    };
+
+	    return (
+	    	<div style={threadListStyle}>
+	    		{threadNodes}
+	    	</div>
+	    );
+    }
 });

@@ -1,4 +1,4 @@
-var FavoritesList = React.createClass({
+var SubredditList = React.createClass({
     propTypes: {
         onSelectFavorite: React.PropTypes.func
     },

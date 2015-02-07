@@ -29,7 +29,7 @@ var Reddit = React.createClass({
 		};
 
 		var content = (typeof this.state.thread === 'undefined') ? 
-			(<ThreadList subreddit={this.state.subreddit} onThread={this.loadThread} />) :
+			(<ThreadList subreddit={this.state.subreddit} onSelectThread={this.loadThread} />) :
 			(
 				<div style={commentContainer}>
 					<div onClick={this.backButton} style={backStyle}>Back</div>

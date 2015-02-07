@@ -23,7 +23,7 @@ FUTURE
 Reddit
 	SideMenu
 		AddSubredditBar
-		FavoritesList
+		SubredditList
 	ThreadList
 		ThreadRow
 	Thread
