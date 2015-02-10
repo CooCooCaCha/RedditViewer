@@ -28,7 +28,8 @@ var Comment = React.createClass({
         author  : React.PropTypes.string,
         body    : React.PropTypes.string,
         replies : React.PropTypes.array,
-        level   : React.PropTypes.number
+        level   : React.PropTypes.number,
+        gilding : React.PropTypes.number
     },
 
     getInitialState: function() {
@@ -70,6 +71,13 @@ var Comment = React.createClass({
             border: '1px solid black'
         };
 
+        var gildStyle = {
+            backgroundColor: 'gold',
+            borderRadius: '6px',
+            padding: '3px',
+            color: '#888'
+        }
+
         var body = this.props.body;
         if( typeof body === 'undefined' )
             body = '[deleted]';
@@ -79,6 +87,7 @@ var Comment = React.createClass({
 
         var replyLevel = this.props.level + 1;
         var expandButtonText = this.state.expanded ? '-' : '+';
+        var showGilding = (this.props.gilding > 0) ? true : false;
 
         var replyComments = this.props.replies.map( function( reply ) {
             var replies = [];
@@ -87,13 +96,13 @@ var Comment = React.createClass({
                 replies = reply.data.replies.data.children;
 
             return (
-                <Comment author={reply.data.author} body={reply.data.body} replies={replies} level={replyLevel} />
+                <Comment author={reply.data.author} body={reply.data.body} replies={replies} level={replyLevel} gilding={reply.data.gilded} />
             );
         });
 
         return (
             <div style={commentStyle}>
-                <div style={authorStyle}>{this.props.author}</div>
+                <div style={authorStyle}>{this.props.author} {showGilding && <span style={gildStyle}>{this.props.gilding}</span>}</div>
                 <div dangerouslySetInnerHTML={{__html: commentHtml}} />
                 <a style={expandButtonStyle} onClick={this.toggleExpanded}>{expandButtonText}</a>
                 {this.state.expanded && <div>{replyComments}</div>}

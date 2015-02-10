@@ -5,7 +5,7 @@ var ThreadList = React.createClass({
     },
 
 	getInitialState: function() {
-	    return { threads: [] };
+	    return { threads: [], page: 0, sort: 'hot' };
 	},
 
 	componentDidMount: function() {
@@ -16,11 +16,43 @@ var ThreadList = React.createClass({
 	    this.getSubredditContent( nextProps.subreddit );
 	},
 
-	subredditToUrl: function( subreddit ) {
-	    if( subreddit === '' ) 
-	        return 'https://www.reddit.com/.json';
+	getLastThreadName: function() {
+		return this.state.threads[this.state.threads.length-1].name;
+	},
 
-	    return 'https://www.reddit.com/r/' + subreddit + '.json';
+	setSorting: function( sort ) {
+		this.setState( {sort: sort}, function() {
+			this.getSubredditContent( this.props.subreddit );
+		});
+	},
+
+	nextPage: function() {
+		this.setState( {page: this.state.page + 1}, function() {
+			this.getSubredditContent( this.props.subreddit );
+		});
+	},
+
+	prevPage: function() {
+		var newPage = this.state.page - 1;
+		if( newPage < 0 )
+			newPage = 0;
+
+		this.setState( {page: newPage}, function() {
+			this.getSubredditContent( this.props.subreddit );
+		});
+	},
+
+	subredditToUrl: function( subreddit ) {
+		var url = '';
+	    if( subreddit === '' ) 
+	        url = 'https://www.reddit.com/' + this.state.sort + '.json';
+		else
+			url = 'https://www.reddit.com/r/' + subreddit + '/' + this.state.sort + '.json';
+
+		if( this.state.page > 0 )
+			url += '?count=25&after=' + this.getLastThreadName();
+
+		return url;
 	},
 
 	getSubredditContent: function( subreddit ) {
@@ -44,6 +76,10 @@ var ThreadList = React.createClass({
 	        backgroundColor: '#ccc'
 	    };
 
+	    var topMenuSection = {
+	    	display: 'inline-block'
+	    };
+
 	    var threadNodes = this.state.threads.map( function( thread ) {
 	    	return (
 	    		<ThreadRow thread={thread} onSelectThread={this.props.onSelectThread} />
@@ -52,6 +88,28 @@ var ThreadList = React.createClass({
 
 	    return (
 	    	<div style={threadListStyle}>
+	    		<div style={topMenuSection}>
+	    			<a onClick={this.setSorting.bind( this, 'hot'           )}>Hot</a>
+	    			<a onClick={this.setSorting.bind( this, 'new'           )}>New</a>
+	    			<a onClick={this.setSorting.bind( this, 'rising'        )}>Rising</a>
+	    			<a onClick={this.setSorting.bind( this, 'controversial' )}>Controversial</a>
+	    			<a onClick={this.setSorting.bind( this, 'top'           )}>Top</a>
+	    		</div>
+	    		<div style={topMenuSection}>
+	    			<a onClick={this.prevPage.bind( this, null )}>Prev</a>
+	    			<a onClick={this.nextPage.bind( this, null )}>Next</a>
+	    		</div>
+	    		{(this.state.sort==='top') &&
+	    		<div style={topMenuSection}>
+	    			<select>
+	    				<option value="Hour">Hour</option>
+	    				<option value="Today">Today</option>
+	    				<option value="Week">Week</option>
+	    				<option value="Month">Month</option>
+	    				<option value="Year">Year</option>
+	    				<option value="All">All Time</option>
+	    			</select>
+	    		</div>}
 	    		{threadNodes}
 	    	</div>
 	    );

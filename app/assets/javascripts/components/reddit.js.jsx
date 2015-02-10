@@ -33,7 +33,7 @@ var Reddit = React.createClass({
 			(
 				<div style={commentContainer}>
 					<div onClick={this.backButton} style={backStyle}>Back</div>
-					<CommentList thread={this.state.thread} />
+					<Thread thread={this.state.thread} />
 				</div>
 			);
 

@@ -8,7 +8,6 @@ Rails is used for managing accounts and subreddits.
 TODO
 - Refactor comment section.
 - Thumbnail view in thread.
-- Collapse sub-comments.
 - Thread list advanced (pagination, and sorting)
 - Comment list advanced (sorting)
 - Router
@@ -31,5 +30,4 @@ Reddit
 		ThreadRow
 	Thread
 		ThreadHeader
-		CommentList
-			Comment
+		Comment
