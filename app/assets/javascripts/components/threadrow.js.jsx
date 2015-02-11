@@ -80,13 +80,12 @@ var ThreadRow = React.createClass({
 				{hasThumb && <a href={this.props.thread.url} target="__blank">
 					<img src={this.props.thread.thumbnail} style={thumbStyle} />
 				</a>}
-		        <div style={titleStyle} onClick={this.props.onSelectThread.bind( null, this.props.thread.id )}>
-		            <span dangerouslySetInnerHTML={{__html: this.props.thread.title}} />
-		        </div>
+				<a target="__blank" style={titleStyle} href={this.props.thread.url} dangerouslySetInnerHTML={{__html: this.props.thread.title}} />
 		        <div style={threadInfoStyle}>
 					<span style={scoreStyle}>{this.props.thread.score}</span>
-					<span> - <i>{this.props.thread.author}</i> </span>
+					<span> <i>{this.props.thread.author}</i> </span>
 					({this.props.thread.domain})
+					<span> - <span onClick={this.props.onSelectThread.bind( null, this.props.thread.id )}>{this.props.thread.num_comments} Comments</span></span>
 		        </div>
                 <div style={expandButtonStyle} onClick={this.toggleExpand}>{expandButtonText}</div>
                 {this.state.expanded && expandedImage}
