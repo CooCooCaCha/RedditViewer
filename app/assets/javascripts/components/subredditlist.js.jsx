@@ -30,7 +30,8 @@ var SubredditList = React.createClass({
 
     	var favoriteStyle = {
     		color: '#fff',
-    		display: 'block'
+    		display: 'block',
+            cursor: 'pointer'
     	};
 
 	    var subredditNodes = this.state.subreddits.map( function( subreddit ) {

@@ -46,7 +46,8 @@ var ThreadRow = React.createClass({
 	        height: '20px',
 	        textAlign: 'center',
 	        border: '1px solid black',
-	        marginTop: '3px'
+	        marginTop: '3px',
+	        cursor: 'pointer'
 	    };
 
 	    var expandedImageContainerStyle = {
@@ -57,6 +58,10 @@ var ThreadRow = React.createClass({
 
 	    var expandedImageStyle = {
 	        width: '60%'
+	    };
+
+	    var commentsLinkStyle = {
+	    	cursor: 'pointer'
 	    };
 
 	    var hasThumb = this.props.thread.thumbnail !== 'self'   && 
@@ -85,7 +90,7 @@ var ThreadRow = React.createClass({
 					<span style={scoreStyle}>{this.props.thread.score}</span>
 					<span> <i>{this.props.thread.author}</i> </span>
 					({this.props.thread.domain})
-					<span> - <span onClick={this.props.onSelectThread.bind( null, this.props.thread.id )}>{this.props.thread.num_comments} Comments</span></span>
+					<span> - <a style={commentsLinkStyle} onClick={this.props.onSelectThread.bind( null, this.props.thread.id )}>{this.props.thread.num_comments} Comments</a></span>
 		        </div>
                 <div style={expandButtonStyle} onClick={this.toggleExpand}>{expandButtonText}</div>
                 {this.state.expanded && expandedImage}

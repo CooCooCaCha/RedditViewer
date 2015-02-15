@@ -68,7 +68,8 @@ var Comment = React.createClass({
             width: '20px',
             height: '20px',
             textAlign: 'center',
-            border: '1px solid black'
+            border: '1px solid black',
+            cursor: 'pointer'
         };
 
         var gildStyle = {
