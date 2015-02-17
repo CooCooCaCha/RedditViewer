@@ -8,7 +8,7 @@ var SubredditList = React.createClass({
     },
 
     componentDidMount: function() {
-    	this.getFavoritesList();
+        this.getFavoritesList();
     },
 
     getFavoritesList: function() {
@@ -28,22 +28,22 @@ var SubredditList = React.createClass({
             marginTop: '10px'
         };
 
-    	var favoriteStyle = {
-    		color: '#fff',
-    		display: 'block',
+        var favoriteStyle = {
+            color: '#fff',
+            display: 'block',
             cursor: 'pointer'
-    	};
+        };
 
-	    var subredditNodes = this.state.subreddits.map( function( subreddit ) {
-	        return (
-	            <a style={favoriteStyle} onClick={this.props.onSelectFavorite.bind( null, subreddit )}>/r/{subreddit}</a>
-	        );
-	    }.bind(this));
+        var subredditNodes = this.state.subreddits.map( function( subreddit ) {
+            return (
+                <a style={favoriteStyle} onClick={this.props.onSelectFavorite.bind( null, subreddit )}>/r/{subreddit}</a>
+            );
+        }.bind(this));
 
-    	return (
-    		<div style={listStyle}>
-    			{subredditNodes}
-    		</div>
-    	);
+        return (
+            <div style={listStyle}>
+                {subredditNodes}
+            </div>
+        );
     }
 });

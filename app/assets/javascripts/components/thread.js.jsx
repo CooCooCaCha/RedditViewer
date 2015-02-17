@@ -72,7 +72,6 @@ var Thread = React.createClass({
                        dangerouslySetInnerHTML={{__html: this.state.header.title}} />
                   <div style={headerBodyStyle} 
                        dangerouslySetInnerHTML={{__html: selftextHtml}} />
-                  <div><img src={this.state.header.url} /></div>
               </div>
               {commentNodes}
           </div>

@@ -4,24 +4,24 @@ var AddFavoriteBar = React.createClass({
     },
 
     getInitialState: function() {
-    	return { userInput: '' };
+        return { userInput: '' };
     },
 
     handleChange: function(e) {
-    	this.setState({userInput: e.target.value});
+        this.setState({userInput: e.target.value});
     },
 
     onNewFavorite: function() {
-    	this.props.onNewFavorite( this.state.userInput );
+        this.props.onNewFavorite( this.state.userInput );
         this.setState( { userInput: '' } );
     },
 
     render: function() {
-    	return (
-    		<div>
-    			<input value={this.state.userInput} onChange={this.handleChange} />
-    			<button onClick={this.onNewFavorite}>+</button>
-    		</div>
-    	);
+        return (
+            <div>
+                <input value={this.state.userInput} onChange={this.handleChange} />
+                <button onClick={this.onNewFavorite}>+</button>
+            </div>
+        );
     }
 });
