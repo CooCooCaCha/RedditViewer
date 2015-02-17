@@ -86,9 +86,10 @@ var Comment = React.createClass({
         var commentHtml = marked( body )
             .replace( /&amp;gt;/g, '>' ).replace( /&amp;lt;/g, '<' );
 
-        var replyLevel = this.props.level + 1;
+        var replyLevel       = this.props.level + 1;
+        var showExpandButton = this.props.replies.length > 0;
         var expandButtonText = this.state.expanded ? '-' : '+';
-        var showGilding = (this.props.gilding > 0) ? true : false;
+        var showGilding      = (this.props.gilding > 0) ? true : false;
 
         var replyComments = this.props.replies.map( function( reply ) {
             var replies = [];
@@ -105,7 +106,7 @@ var Comment = React.createClass({
             <div style={commentStyle}>
                 <div style={authorStyle}>{this.props.author} {showGilding && <span style={gildStyle}>{this.props.gilding}</span>}</div>
                 <div dangerouslySetInnerHTML={{__html: commentHtml}} />
-                <a style={expandButtonStyle} onClick={this.toggleExpanded}>{expandButtonText}</a>
+                {showExpandButton && <a style={expandButtonStyle} onClick={this.toggleExpanded}>{expandButtonText}</a>}
                 {this.state.expanded && <div>{replyComments}</div>}
             </div>
         );
